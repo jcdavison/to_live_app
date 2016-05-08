@@ -143,8 +143,9 @@ class LogEvent extends React.Component{
     } else {
       this.setState({isLoading: true});
       var encodedData = encodeURIComponent(this.state.imageData);
-      console.log("encoded data", encodedData)
-      Api.post('/events', {info: this.state.info, imageData: encodedData })
+      var body = JSON.stringify({event: {info: this.state.info, imageData: encodedData }})
+      console.log('submit Event body', body)
+      Api.post('/events', body)
         .then( (res) => {
           this.setState({info: null, isLoading: false});
           PubSub.publish('refreshIndex');

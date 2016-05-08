@@ -1,5 +1,5 @@
-var SERVER = 'http://localhost:3000'
-// var SERVER = 'https://biocloud.herokuapp.com'
+// var SERVER = 'http://localhost:3000'
+var SERVER = 'https://biocloud.herokuapp.com'
 
 var api = {
   get(uri) {
@@ -7,10 +7,11 @@ var api = {
     .then(res => res.json())
   },
 
-  post(uri, data) {
+  post(uri, body) {
     var url = `${SERVER}/api${uri}`
-    var body = `bioEvent[info]=${data.info}&bioEvent[imageData]=${data.imageData}`
-    return fetch(url, {method: 'post', body }).then((res) => res.json() );
+    console.log(body)
+    var headers = { 'Accept': 'application/json', 'Content-Type': 'application/json'}
+    return fetch(url, {method: "POST", headers: headers, body: body})
   }
 };
 
